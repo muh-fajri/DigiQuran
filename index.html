@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiQuran by Fajri</title>
+    <link rel="stylesheet" href="./fontawesome-all.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="toTop" onclick="gotoTop()"><span class="fas fa-angle-up"></span></div>
+    <header>
+        <div class="app-title">
+            <h1><a href="./index.html"><span class="fas fa-quran"></span> DigiQuran <small>by Fajri</small></a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="openSearch()"><span class="fas fa-search"></span> Search Ayat</a></li>
+                <li><a href="./about.html"><span class="fas fa-info-circle"></span> Tentang</a></li>
+            </ul>
+            <div class="search-menu">
+                <input type="text" name="" id="" placeholder="Type keyword..."/>
+                <span id="btn-close" onclick="closeSearch()">
+                    <span class="fas fa-times"></span>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <article>
+        <div id="surah-list">
+            <!-- No make modified here -->
+        </div>
+        <div id="surah-title">
+            <!-- No make modified here -->
+        </div>
+        <div id="surah-content">
+            <!-- No make modified here -->
+        </div>
+    </article>
+    <footer>
+        <p>Made with <span>&hearts;</span> by <a href="#">Muhammad Fajri</a></p>
+    </footer>
+
+    <!-- Script Javascript -->
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script src="./fontawesome-all.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

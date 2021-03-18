@@ -1,0 +1,303 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto-Regular-webfont.woff');
+}
+@font-face {
+    font-family: 'AlQalam';
+    src: url('./_PDMS_Saleem_QuranFont.ttf');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::selection {
+    background-color: var(--green);
+    color: #fff;
+}
+:root {
+    --white: #FFFFFF;
+    --light-gray: #F3F3F3;
+    --green: #0DB667;
+    --green-alpha: #0DB667cc;
+}
+body {
+    background-color: var(--light-gray);
+    font-family: Roboto;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.surah-name, .title > h2, .detail > p.arab {
+    font-family: AlQalam;
+    font-size: 40px;
+    line-height: 60px;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+/* -- Smooth Scrolling -- */
+
+/* Scroll to Top */
+#toTop {
+    background-color: var(--green);
+    color: #fff;
+    bottom: 20px;
+    right: 20px;
+    z-index: 15;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    opacity: .8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+#toTop:hover {
+    background-color: var(--green);
+    opacity: 1;
+}
+/* -- Scroll to Top -- */
+
+header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 0 var(--green-alpha);
+    justify-content: space-between;
+    z-index: 10;
+}
+header h1 {
+    font-size: 25px;
+}
+header h1 small {
+    color: var(--green);
+}
+header li {
+    display: inline-flex;
+}
+header a {
+    padding: 10px;
+}
+
+/* Search Bar */
+.search-menu {
+    display: none;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    width: 35%;
+    background-color: #fff;
+}
+.search-menu > span {
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    width: 10%;
+    text-align: center;
+    background-color: var(--green);
+    color: #fff;
+    cursor: pointer;
+}
+.search-menu > input {
+    width: 90%;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 5px 10px;
+    font-size: 15px;
+    border: 1px solid var(--green);
+}
+/*-- Search Bar --*/
+
+article {
+    margin: 0 auto;
+    margin-top: 80px;
+    width: 98%;
+    justify-content: center;
+}
+
+/* Style for Surah List */
+.card {
+    float: right;
+    width: 23%;
+    margin: 10px;
+    padding: 10px 5px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 5px;
+}
+.card:hover {
+    box-shadow: 0 0 10px #cecece;
+}
+.card h2 {
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.card .surah-name {
+    color: var(--green);
+}
+.card .surah-attribute {
+    font-size: 15px;
+}
+/*-- Style for Surah List --*/
+
+/* Back Bar */
+.back-bar {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.back-bar a {
+    background-color: var(--white);
+    padding: 8px 15px;
+    display: inline-block;
+    border-bottom: 5px solid var(--green);
+}
+/*-- Back Bar --*/
+
+/* Style for Surah Content */
+.detail {
+    /* margin: 15px 10px; */
+    margin: 15px auto;
+    width: 90%;
+    /* padding: 10px; */
+    background-color: #fff;
+    border-radius: 5px;
+    /* border: 1px solid var(--green); */
+}
+.detail p {
+    padding: 10px 20px;
+    padding-top: 0;
+}
+.detail .nomor {
+    border-top-left-radius: 4px;
+    margin-top: 0;
+    position: absolute;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: var(--green);
+    color: #fff;
+    font-weight: bold;
+}
+.detail .arab {
+    padding-top: 10px;
+    text-align: right;
+    font-size: 25px;
+}
+.detail .trs {
+    padding: 0 20px;
+    font-style: oblique;
+}
+.detail .idn {
+    padding: 10px 20px 20px 20px;
+}
+/*-- Style for Surah Content --*/
+
+.about {
+    text-align: center;
+    line-height: 28px;
+    margin: 0 20px;
+    margin-top: 90px;
+}
+.about p {
+    margin-bottom: 10px;
+}
+
+footer {
+    width: 100%;
+    clear: both;
+    margin-top: 30px;
+    padding: 10px 20px;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 -4px 0 var(--green-alpha);
+}
+footer span {
+    color: var(--green);
+    font-size: 20px;
+}
+
+@media screen and (max-width:1100px) {
+    .search-menu {
+        width: 40%;
+    }
+    .card {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .card {
+        width: 47.5%;
+        margin: 5px;
+    }
+    .search-menu {
+        width: 50%;
+    }
+    header h1 {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    header {
+        flex-direction: column;
+        padding: 5px 10px;
+    }
+    header h1 {
+        font-size: 20px;
+    }
+    header li {
+        font-size: 15px;
+    }
+    header a {
+        padding: 5px 10px;
+    }
+
+    .search-menu {
+        width: 100%;
+        right: 0;
+        top: 40px;
+    }
+    .search-menu > span {
+        padding: 8px 10px;
+    }
+
+    .card {
+        width: 98%;
+        padding: 20px 10px;
+    }
+    article {
+        margin-top: 75px;
+    }
+
+    .detail {
+        margin: 15px auto;
+        width: auto;
+    }
+
+}
