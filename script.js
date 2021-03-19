@@ -25,105 +25,128 @@ const closeSearch = () => {
 }
 /*-- Button Open and Close Search --*/
 
-/* Metode Parsing JSON dengan HTTP Request */
-// const xhttp = new XMLHttpRequest();
-// xhttp.onreadystatechange = function() {
-//     if(this.readyState == 4 && this.status == 200) {
-//         // Typical action to be performed when the document is ready:
-//         const data = JSON.parse(xhttp.responseText);
-//         data.forEach((element) => {
-//             document.getElementById("article").innerHTML +=
-//             `
-//                 <div class="card">
-//                     <h2 class="surah-name">${element.nama}</h2>
-//                     <h3 class="latin-name">${element.nama_latin} (${element.nomor})</h3>
-//                     <p class="surah-attribute">
-//                         <span class="ayah-count">${element.jumlah_ayat} ayat</span>
-//                     </p>
-//                     <p class="surah-translation">${element.arti}</p>
-//                 </div>
-//             `;
-//         });
-//         console.log(data);
-//     }
-// };
-// // xhttp.open("GET", "./data.json", true);
-// xhttp.open("GET", "res_DaftarSurah.json", true);
-// xhttp.send();
-/*-- Metode Parsing JSON dengan HTTP Request --*/
+/* Metode Request Web API :
+ * - Dengan HTTP Request
+ * - Dengan AJAX   -> $.ajax()
+ * - Dengan jQuery -> $getJSON()
+*/
 
-/* Metode Parsing JSON dengan AJAX-nya jQuery */
-// $.getJSON('./res_DaftarSurah.json', (data) => {
-$.getJSON('https://equran.id/api/surat', (data) => {
-    console.log(data);
-    $.each(data, (i, data) => {
-        // console.log(i);
+/* Request Web API */
+$.ajax({
+    url: 'https://api.quran.sutanlab.id/surah',
+    type: 'get',
+    dataType: 'json',
+    data: '',
+    success: (data) => {
         // console.log(data);
-        $('#surah-list').append(`
-            <div class="card">
-                <h2 class="surah-name" data-target="#content-surah" data-id="${data.nomor}">${data.nama}</h2>
-                <h3 class="latin-name">${data.nama_latin} (${data.nomor})</h3>
-                <p class="surah-attribute"><span class="ayah-count">${data.jumlah_ayat} ayat</span></p>
-                <p class="surah-translation">${data.arti}</p>
-                <audio controls>
-                <source src="${data.audio}" type="audio/mpeg">
-                </audio>
-            </div>
-        `);
-    })
+        // if(data.Response == "True") {
+        //     console.log(data.Response);
+            let surah = data.data;
+            $.each(surah, (i, data) => {
+                // console.log(i);
+                // console.log(data);
+                $('#surah-list').append(`
+                    <div class="card">
+                        <h2 class="surah-name" data-id="${data.number}">${data.name.long}</h2>
+                        <h3 class="latin-name">${data.name.transliteration.id} (${data.number})</h3>
+                        <p class="surah-attribute"><span class="ayah-count">${data.numberOfVerses} ayat</span></p>
+                        <p class="surah-translation">${data.name.translation.id}</p>
+                    </div>
+                `);
+            });
+        // } else {
+        //     $('#surah-list').html(data.Error);
+        // }
+    }
 });
 
 $('#surah-list').on('click', '.surah-name', function() {
     $('#surah-list').html('');
     // console.log($(this).data("id"));
-    let nomor = $(this).data("id");
-    console.log(nomor);
+    let number = $(this).data("id");
+    // console.log(nomor);
     // console.log($('.surah-name').data('id'));
 
     // $.getJSON('./res_SurahFatihah.json', (data) => {
-    $.getJSON(`https://equran.id/api/surat/${nomor}`, (data) => {
-        console.log(data);
-        $('#surah-content').append(`
-            <div class="back-bar">
-                <p><a href="./index.html"><span class="fas fa-angle-left"></span> Kembali</a></p>
-            </div>
-            <div class="title" style="text-align:center">
-                <h2>${data.nama}</h2>
-                <p>
-                    <span>${data.nama_latin}</span>
-                    <span>(${data.arti})</span>
-                </p>
-                <p style="font-size:14px;font-weight:bold">
-                    <span>Surah ke-${data.nomor}</span>
-                    :
-                    <span>${data.jumlah_ayat} ayat</span>
-                </p>
-            </div>
-        `);
-        let ayat = data.ayat;
-    // console.log(ayat);
-    $.each(ayat, (i, data) => {
-        // console.log(i);
-        console.log(data);
-        $('#surah-content').append(`
-            <div class="detail">
-                <p class="nomor">${data.surah}:${data.nomor}</p>
-                <p class="arab" dir="rtl">${data.ar}</p>
-                <p class="trs">${data.tr}</p>
-                <p class="idn">${data.idn}</p>
-            </div>
-        `);
-    })
+    $.ajax({
+        url: `https://api.quran.sutanlab.id/surah/${number}`,
+        type: 'get',
+        dataType: 'json',
+        data: '',
+        success: (data) => {
+            // console.log(data);
+            let surah = data.data;
+            // console.log(surah);
+            if((`${surah.number}` == '1') || (`${surah.number}` == '9')) {
+                $('#surah-content').append(`
+                    <div class="back-bar">
+                        <p><a href="./index.html"><span class="fas fa-angle-left"></span> Kembali</a></p>
+                    </div>
+                    <div class="title" style="text-align:center">
+                        <h2>${surah.name.long}</h2>
+                        <p>
+                            <span>${surah.name.transliteration.id}</span>
+                            <span>(${surah.name.translation.id})</span>
+                        </p>
+                        <p>
+                            <span>${surah.revelation.id} - </span>
+                            <span dir="rtl" class="revelation">${surah.revelation.arab}</span>
+                        </p>
+                        <p style="font-size:14px;font-weight:bold">
+                            <span>Surah ke-${surah.number}</span>
+                            :
+                            <span>${surah.numberOfVerses} ayat</span>
+                        </p>
+                    </div>
+                `);
+            } else {
+                $('#surah-content').append(`
+                    <div class="back-bar">
+                        <p><a href="./index.html"><span class="fas fa-angle-left"></span> Kembali</a></p>
+                    </div>
+                    <div class="title" style="text-align:center">
+                        <h2>${surah.name.long}</h2>
+                        <p>
+                            <span>${surah.name.transliteration.id}</span>
+                            <span>(${surah.name.translation.id})</span>
+                        </p>
+                        <p>
+                            <span>${surah.revelation.id} - </span>
+                            <span dir="rtl" class="revelation">${surah.revelation.arab}</span>
+                        </p>
+                        <p style="font-size:14px;font-weight:bold">
+                            <span>Surah ke-${surah.number}</span>
+                            :
+                            <span>${surah.numberOfVerses} ayat</span>
+                        </p>
+                        <div class="preBismillah">
+                            <p class="bismillah">${surah.preBismillah.text.arab}</p>
+                        </div>
+                    </div>
+                `);
+            }
+            let verses = data.data.verses;
+            // console.log(verses);
+            $.each(verses, (i, data) => {
+                // console.log(i);
+                // console.log(data);
+                $('#surah-content').append(`
+                    <div class="detail">
+                        <p class="meta">
+                            <span>${data.number.inSurah}</span>
+                            <a style="display:none" class="tafsir" href="#" data-tafsir="${data.number.inSurah}"><span class="fas fa-book"></a>
+                            <a style="display:none"><span class="fas fa-play"></a>
+                        </p>
+                        <audio controls>
+                            <source src="${data.audio.primary}">
+                        </audio>
+                        <p class="arab" dir="rtl">${data.text.arab}</p>
+                        <p class="trs">${data.text.transliteration.en}</p>
+                        <p class="idn">${data.translation.id}</p>
+                    </div>
+                `);
+            });
+        }
+    });
 });
-});
-
-// $.getJSON('./res_SurahFatihah.json', (data) => {
-//     let fatihah = data.ayat;
-//     // console.log(fatihah);
-//     $.each(fatihah, (i, data) => {
-//         // console.log(i);
-//         // console.log(data);
-//         $('#article').append('<div class="card"><h2 class="surah-name">'+data.nomor+'</h2><h3 class="latin-name">'+data.ar+'</h3><p class="surah-attribute"><span class="ayah-count">'+data.tr+'</span></p><p class="surah-translation">'+data.idn+'</p></div>');
-//     })
-// });
-/*-- Metode Parsing JSON dengan AJAX-nya jQuery --*/
+/*-- Request Web API --*/
