@@ -90,7 +90,8 @@ input, button {
 .preBismillah {
     background-color: var(--blue);
     padding: 10px;
-    margin : 20px 0;
+    width: 90%;
+    margin : 20px auto;
     border-radius: 5px;
 }
 
@@ -370,6 +371,10 @@ footer span {
 @media screen and (max-width:500px) {
     header h1 {
         font-size: 20px;
+    }
+
+    .preBismillah {
+        width: 100%;
     }
 
     .card {

@@ -114,7 +114,7 @@ $('#surah-list').on('click', '.surah-name', function() {
                 $('#surah-content').append(`
                     <div class="detail">
                         <p class="meta">
-                            <span>${data.number.inSurah}</span>
+                            <span>${surah.number} : ${data.number.inSurah}</span>
                             <a style="display:none" class="tafsir"><span class="fas fa-book"></a>
                             <a style="display:none"><span class="fas fa-play"></a>
                         </p>
