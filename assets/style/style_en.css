@@ -1,36 +1,35 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('./Roboto-Regular-webfont.woff');
+    src: url('../fonts/Roboto-Regular-webfont.woff');
 }
 @font-face {
     font-family: PDMSSaleem;
-    src: url('./_PDMS_Saleem_QuranFont.ttf');
+    src: url('../fonts/_PDMS_Saleem_QuranFont.ttf');
 }
 @font-face {
     font-family: AlQalam;
-    src: url('./AlQalamQuran.ttf');
+    src: url('../fonts/AlQalamQuran.ttf');
 }
 @font-face {
     font-family: Noorehira;
-    src: url('./noorehira.ttf');
+    src: url('../fonts/noorehira.ttf');
 }
 @font-face {
     font-family: Uthmani;
-    src: url('./UthmanTN1_Ver07.otf');
+    src: url('../fonts/UthmanTN1_Ver07.otf');
 }
 @font-face {
     font-family: UthmaniBold;
-    src: url('./UthmanTN1B_Ver07.otf');
+    src: url('../fonts/UthmanTN1B_Ver07.otf');
 }
 @font-face {
     font-family: Noorehidayat;
-    src: url('./noorehidayat.ttf');
+    src: url('../fonts/noorehidayat.ttf');
 }
 @font-face {
     font-family: Scheherazade;
-    src: url('./ScheherazadeRegOT.ttf');
+    src: url('../fonts/ScheherazadeRegOT.ttf');
 }
-
 
 * {
     margin: 0;
@@ -38,18 +37,18 @@
     box-sizing: border-box;
 }
 ::-moz-selection {
-    background-color: var(--green);
+    background-color: var(--blue);
     color: #fff;
 }
 ::selection {
-    background-color: var(--green);
+    background-color: var(--blue);
     color: #fff;
 }
 :root {
     --white: #FFFFFF;
     --light-gray: #F3F3F3;
-    --green: #0DB667;
-    --green-alpha: #0DB667cc;
+    --blue: #0ca8d8;
+    --blue-alpha: #0ca8d8cc;
 }
 body {
     background-color: var(--light-gray);
@@ -89,7 +88,7 @@ input, button {
     padding-top: 5px;
 }
 .preBismillah {
-    background-color: var(--green);
+    background-color: var(--blue);
     padding: 10px;
     margin : 20px 0;
     border-radius: 5px;
@@ -103,7 +102,7 @@ html {
 
 /* Scroll to Top */
 #toTop {
-    background-color: var(--green);
+    background-color: var(--blue);
     color: #fff;
     bottom: 20px;
     right: 20px;
@@ -120,7 +119,7 @@ html {
     text-align: center;
 }
 #toTop:hover {
-    background-color: var(--green);
+    background-color: var(--blue);
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
@@ -144,7 +143,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    box-shadow: 0 5px 0 var(--green-alpha);
+    box-shadow: 0 5px 0 var(--blue-alpha);
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
@@ -154,7 +153,7 @@ header h1 {
     font-size: 25px;
 }
 header h1 small {
-    color: var(--green);
+    color: var(--blue);
 }
 header li {
     display: -webkit-inline-box;
@@ -181,7 +180,7 @@ header a {
     padding: 10px;
     width: 10%;
     text-align: center;
-    background-color: var(--green);
+    background-color: var(--blue);
     color: #fff;
     cursor: pointer;
 }
@@ -191,7 +190,7 @@ header a {
     font-family: inherit;
     padding: 5px 10px;
     font-size: 15px;
-    border: 1px solid var(--green);
+    border: 1px solid var(--blue);
 }
 /*-- Search Bar --*/
 
@@ -223,7 +222,7 @@ article {
     margin-bottom: 20px;
 }
 .card .surah-name {
-    color: var(--green);
+    color: var(--blue);
 }
 .card .surah-attribute {
     font-size: 15px;
@@ -240,7 +239,8 @@ article {
     background-color: var(--white);
     padding: 8px 15px;
     display: inline-block;
-    border-bottom: 5px solid var(--green);
+    border-bottom: 5px solid var(--blue);
+    border-radius: 5px;
 }
 /*-- Back Bar --*/
 
@@ -252,7 +252,7 @@ article {
     /* padding: 10px; */
     background-color: #fff;
     border-radius: 5px;
-    /* border: 1px solid var(--green); */
+    /* border: 1px solid var(--blue); */
 }
 .detail p {
     padding: 10px 20px;
@@ -262,7 +262,7 @@ article {
     border-top-left-radius: 4px;
     position: absolute;
     padding: 0;
-    background-color: var(--green);
+    background-color: var(--blue);
     color: #fff;
     font-weight: bold;
     z-index: 10px;
@@ -274,12 +274,12 @@ article {
 }
 .detail .meta > a:hover {
     background-color: var(--light-gray);
-    color: var(--green);
+    color: var(--blue);
     cursor: pointer;
 }
 .detail audio {
     position: absolute;
-    right: 0;
+    right: 6%;
     width: 50px;
     height: 40px;
 }
@@ -316,10 +316,10 @@ footer {
     background-color: #fff;
     text-align: center;
     font-size: 14px;
-    box-shadow: 0 -4px 0 var(--green-alpha);
+    box-shadow: 0 -4px 0 var(--blue-alpha);
 }
 footer span {
-    color: var(--green);
+    color: var(--blue);
     font-size: 20px;
 }
 
@@ -340,21 +340,15 @@ footer span {
     .search-menu {
         width: 50%;
     }
-    header h1 {
-        font-size: 22px;
-    }
-}
-
-@media screen and (max-width:500px) {
     header {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         padding: 5px 10px;
     }
     header h1 {
-        font-size: 20px;
+        font-size: 22px;
     }
     header li {
         font-size: 15px;
@@ -371,6 +365,12 @@ footer span {
     .search-menu > span {
         padding: 8px 10px;
     }
+}
+
+@media screen and (max-width:500px) {
+    header h1 {
+        font-size: 20px;
+    }
 
     .card {
         width: 98%;
@@ -384,5 +384,13 @@ footer span {
         margin: 15px auto;
         width: auto;
     }
+    .detail audio {
+        right: 1%;
+    }
 
+    .back-bar {
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 90px;
+    }
 }
