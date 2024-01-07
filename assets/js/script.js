@@ -31,7 +31,7 @@ $('#close-search').click(function() {
 
 /* Request Web API */
 $.ajax({
-    url: 'https://api.quran.sutanlab.id/surah',
+    url: 'https://api.quran.gading.dev/surah',
     type: 'get',
     dataType: 'json',
     data: '',
@@ -54,7 +54,7 @@ $('#surah-list').on('click', '.surah-name', function() {
     $('#surah-list').html('');
     let number = $(this).data("id");
     $.ajax({
-        url: `https://api.quran.sutanlab.id/surah/${number}`,
+        url: `https://api.quran.gading.dev/surah/${number}`,
         type: 'get',
         dataType: 'json',
         data: '',
