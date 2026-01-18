@@ -22,4 +22,4 @@ Currently added:
 * JavaScript (using jQuery Library)
 * Quran REST Server API
 
-[DigiQuran](./digiquran1.png)
+![DigiQuran](./digiquran1.png)
