@@ -90,8 +90,6 @@ input, button {
 .preBismillah {
     background-color: var(--green);
     padding: 10px;
-    width: 90%;
-    margin : 20px auto;
     border-radius: 5px;
 }
 
@@ -125,6 +123,35 @@ html {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 /* -- Scroll to Top -- */
+
+/* Animasi Spinner Memuat Ayat */
+.loading-state {
+    text-align: center;
+    padding: 50px;
+    width: 100%;
+}
+.fa-spinner {
+    font-size: 50px;
+    color: var(--green);
+    margin-bottom: 10px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* -- Animasi Spinner Memuat Ayat -- */
+
+/* Animasi spinner di dalam tombol */
+.fa-spin {
+    animation: spin 1s linear infinite;
+    margin-right: 8px; /* Jarak antara ikon dan teks */
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* -- Animasi spinner di dalam tombol -- */
 
 header {
     display: -webkit-box;
@@ -193,30 +220,44 @@ header a {
     font-size: 15px;
     border: 1px solid var(--green);
 }
+mark.highlight {
+    background-color: #3bff5c;
+}
+.card, .detail {
+    transition: opacity 0.3s ease;
+}
 /*-- Search Bar --*/
 
 article {
     margin: 0 auto;
     margin-top: 80px;
-    width: 98%;
+    width: 100%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
 }
 
 /* Style for Surah List */
+#surah-list {
+    display: flex;
+    flex-wrap: wrap; /* Agar kartu turun ke bawah jika layar sempit */
+    justify-content: center; /* Kartu berada di tengah */
+    gap: 15px; /* Jarak antar kartu tanpa perlu margin manual */
+}
 .card {
-    float: right;
-    width: 23%;
-    margin: 10px;
-    padding: 10px 5px;
+    display: flex;
+    flex-direction: column; /* Isi kartu disusun memanjang ke bawah */
+    justify-content: space-between; /* Memberi jarak merata antar elemen */
+    width: calc(25% - 20px); /* 4 kolom pada layar besar */
+    padding: 20px;
     background-color: #fff;
     text-align: center;
-    line-height: 25px;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 .card:hover {
-    box-shadow: 0 0 10px #cecece;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 .card h2 {
     cursor: pointer;
@@ -230,52 +271,51 @@ article {
 }
 /*-- Style for Surah List --*/
 
-/* Back Bar */
-.back-bar {
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-}
-.back-bar a {
-    background-color: var(--white);
-    padding: 8px 15px;
-    display: inline-block;
-    border-bottom: 5px solid var(--green);
-    border-radius: 5px;
-}
-/*-- Back Bar --*/
-
 /* Style for Surah Content */
+#surah-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px;
+}
 .detail {
-    /* margin: 15px 10px; */
-    margin: 15px auto;
-    width: 90%;
-    /* padding: 10px; */
     background-color: #fff;
     border-radius: 5px;
-    /* border: 1px solid var(--green); */
 }
 .detail p {
     padding: 10px 20px;
     padding-top: 0;
 }
+/* Sembunyikan player default browser */
+.detail audio {
+    display: none;
+}
+/* Memperbaiki baris meta agar rapi */
 .detail .meta {
-    border-top-left-radius: 4px;
-    position: absolute;
     padding: 0;
+    position: relative; /* Diubah dari absolute agar tidak menabrak teks arab */
+    display: inline-flex;
+    border-top-left-radius: 4px;
     background-color: var(--green);
     color: #fff;
     font-weight: bold;
-    z-index: 10px;
+    margin-bottom: 10px;
 }
+/* Gaya untuk semua item di dalam meta (nomor, tafsir, audio) */
 .detail .meta > span,
 .detail .meta > a {
     padding: 8px 15px;
     display: inline-block;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+/* Hilangkan border kanan untuk item terakhir */
+.detail .meta > a:last-child {
+    border-right: none;
 }
 .detail .meta > a:hover {
     background-color: var(--light-gray);
     color: var(--green);
+    text-decoration: none; /* Agar tidak ada garis bawah saat hover */
     cursor: pointer;
 }
 .detail audio {
@@ -284,8 +324,28 @@ article {
     width: 50px;
     height: 40px;
 }
+
+/* Pastikan tombol meta memiliki lebar tetap atau flex yang stabil */
+.detail .meta > a.audio-play, 
+.detail .meta > a.tafsir {
+    min-width: 50px; /* Memberikan ruang yang cukup agar ikon tidak goyang saat berganti */
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Tambahkan transisi halus jika perlu */
+.detail .meta .fas {
+    transition: transform 0.2s ease;
+    font-size: 16px;
+    pointer-events: none; /* Menghindari klik yang tidak sengaja terbaca pada elemen ikon saja */
+}
+
+/* Sesuaikan padding teks arab karena meta sekarang relative */
 .detail .arab {
-    padding-top: 40px;
+    padding-top: 10px;
     text-align: right;
     font-size: 25px;
 }
@@ -324,19 +384,18 @@ footer span {
     font-size: 20px;
 }
 
-@media screen and (max-width:1100px) {
+@media screen and (max-width:1024px) {
     .search-menu {
         width: 40%;
     }
     .card {
-        width: 30%;
+        width: calc(33.33% - 20px); /* 3 Kolom */
     }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:768px) {
     .card {
-        width: 47.5%;
-        margin: 5px;
+        width: calc(50% - 20px); /* 2 Kolom */
     }
     .search-menu {
         width: 50%;
@@ -368,7 +427,7 @@ footer span {
     }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:480px) {
     header h1 {
         font-size: 20px;
     }
@@ -378,24 +437,14 @@ footer span {
     }
 
     .card {
-        width: 98%;
-        padding: 20px 10px;
+        width: 95%; /* 1 Kolom penuh */
     }
+
     article {
         margin-top: 75px;
     }
 
-    .detail {
-        margin: 15px auto;
-        width: auto;
-    }
     .detail audio {
         right: 1%;
-    }
-
-    .back-bar {
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 90px;
     }
 }
